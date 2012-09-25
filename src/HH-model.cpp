@@ -152,25 +152,25 @@ int main(int argc, char **argv){
 	    break;
 
 	  case '?':
-             if (optopt == 'c')
-	     {
-               std::cout <<  "Option " << optopt << "requires an argument." << std::endl;
-	       exit(1);
-	     }
-             else if (isprint (optopt))
-	     {
-               std::cout <<  "Unknown option " << optarg << std::endl;
-	       exit(1);
-	     }
-             else
-	     {
-               std::cout << "Unknown option " << std::endl;
-	       std::cout <<"\nAborting..." << std::endl;
-	       exit(1);
-	     }
+//          if (optopt == 'c')
+// 	     {
+//            std::cout <<  "Option " << optopt << "requires an argument." << std::endl;
+// 	       exit(1);
+// 	     }
+//          else if (isprint (optopt))
+// 	     {
+//            std::cout <<  "Unknown option " << optarg << std::endl;
+// 	       exit(1);
+// 	     }
+//          else
+// 	     {
+           std::cout << "Unknown option " << std::endl;
+	       std::cout << "Aborting..." << std::endl;
+// 	       exit(1);
+// 	     }
              
-           default:
-             abort ();
+         default:
+            abort ();
 	    
 	  }
 	  
