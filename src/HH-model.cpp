@@ -70,7 +70,7 @@
 int main(int argc, char **argv){
 
     int POINTS=250;
-    char verbosity='n',gengraphs='g';
+    char verbosity='n',gengraphs='g', automatic='n';
     
     std::string paramfile = "parameters.txt";
     std::string iniconfile = "init_cond.txt";
@@ -94,39 +94,7 @@ int main(int argc, char **argv){
     double t=0.0;       // Starting time, this variable is a "time buffer"
     double tf=25.0;	// 25 ms for time integration
  
-// ==========================================================================
-    // Initial conditions
-// ==========================================================================
 
-//     y[0]=-60;   // Initial transmembrane potential, assuming resting potential
-//     y[1]=0;     // Gating functions
-//     y[2]=0;	// Gating functions
-//     y[3]=0;	// Gating functions
-//     
-    
-// # Membrane capacitance in Farads
-// Cm = 0.001; 
-// 
-// # Ion conductances in mMho
-// gNa = 120;
-// gK  = 36;
-// gL  = 0.3;
-// 
-// # Ion equilibrium potentials in mVolts
-// vNa = -115;
-// vK  = 12;
-// vL  = 10.613;
-/*    
-    parametros[0]=0.01;   // Membrane capacitance
-    parametros[1]=0.1;	  // induced current on axon, 0 means no external current
-    parametros[2]=1.20;   // Na conductances
-    parametros[3]=55.17;  // Na Nernst Potential
-    parametros[4]=0.36;   // K Conductance
-    parametros[5]=-72.14; // K Nernst Potential
-    parametros[6]=0.003;  // Leakage conductance (Due to a Cl current)
-    parametros[7]=-49.42; // Leakage Nernst potential (Due to a Cl current)
-    */
-    
 
 // ==========================================================================
 //   Console commands to run the programm
@@ -136,14 +104,15 @@ int main(int argc, char **argv){
 	extern int optind;
 	extern char *optarg;
 
-	while ((c = getopt(argc, argv, "hvgt:p:k:i:b:e:")) != -1)
+	while ((c = getopt(argc, argv, "hvgAt:p:k:i:b:e:")) != -1)
 	  switch (c)  {
 	  case 'h':
 	    std::cout << "\nUsage: %s [options] \n" << argv[0] << std::endl;
 	    std::cout <<"\t-h  : this help message"<< std::endl;
 	    std::cout <<"\t-v  : set verbosity level,(No verbosity by default)"<< std::endl;
 	    std::cout <<"\t-g  : Don't generate PNG graphics,(Graphics by default)"<< std::endl;
-            std::cout <<"\t-t# : integrate from zero to # (In milliseconds),(Default= " << tf << ")" << std::endl;
+        std::cout <<"\t-A  : Automatic parameter and initial conditions (Built-in defaults)"<< std::endl;
+        std::cout <<"\t-t# : integrate from zero to # (In milliseconds),(Default= " << tf << ")" << std::endl;
 	    std::cout <<"\t-p# : set number of points used (Default " << POINTS << ")" << std::endl;
 	    std::cout <<"\t-i@ : initial conditions file [-ifilename.ext] (Default \"" << iniconfile << "\")" << std::endl;
 	    std::cout <<"\t-k@ : parameters file [-kfilename.ext] (Default \"" << paramfile << "\")" << std::endl;
@@ -159,8 +128,11 @@ int main(int argc, char **argv){
 	    
 	  case 'g':  gengraphs='n';
 	    break;
+        
+      case 'A':  automatic='y'; // Automatic mode
+        break;
 
-          case 't': tf=atof(optarg);
+      case 't': tf=atof(optarg);
 	    break;
 
 	  case 'p': POINTS = atoi(optarg);
@@ -201,10 +173,58 @@ int main(int argc, char **argv){
              abort ();
 	    
 	  }
+	  
+	  
+    
+	if (automatic=='y')
+    {
+               
+// ==========================================================================
+// Initial conditions AUTOMATED
+// ==========================================================================
 
-		    getInfoFromFile(iniconfile,y);
-		    getInfoFromFile(paramfile,parametros);
-		    
+    y[0]=-60;   // Initial transmembrane potential, assuming resting potential
+    y[1]=0;     // Gating functions
+    y[2]=0;  // Gating functions
+    y[3]=0;  // Gating functions
+    
+    
+// # Membrane capacitance in Farads
+// Cm = 0.001; 
+// 
+// # Ion conductances in mMho
+// gNa = 120;
+// gK  = 36;
+// gL  = 0.3;
+// 
+// # Ion equilibrium potentials in mVolts
+// vNa = -115;
+// vL  = 10.613;
+// vK  = 12;
+    
+    parametros[0]=0.01;   // Membrane capacitance
+    parametros[1]=0.1;    // induced current on axon, 0 means no external current
+    parametros[2]=1.20;   // Na conductances
+    parametros[3]=55.17;  // Na Nernst Potential
+    parametros[4]=0.36;   // K Conductance
+    parametros[5]=-72.14; // K Nernst Potential
+    parametros[6]=0.003;  // Leakage conductance (Due to a Cl current)
+    parametros[7]=-49.42; // Leakage Nernst potential (Due to a Cl current)
+    
+    
+        
+    }
+    else
+    {
+// ==========================================================================
+// Initial conditions FROM FILE
+// ==========================================================================        
+        
+            getInfoFromFile(iniconfile,y);
+            getInfoFromFile(paramfile,parametros);
+    }
+        
+        
 
             std::cout << "Initial Conditions" << std::endl;
             
