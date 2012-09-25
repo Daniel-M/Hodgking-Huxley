@@ -33,10 +33,10 @@
 
 
 // Program Headers
-#include <iostream>
-#include <string>
-#include <iomanip>
-#include<fstream>
+// #include <iostream>
+// #include <string>
+// #include <iomanip>
+// #include<fstream>
 #include <cmath>
 
 // C old headers

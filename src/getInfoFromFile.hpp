@@ -28,6 +28,11 @@
     
 */
 
+#include <iostream>
+#include <string>
+#include <iomanip>
+#include<fstream>
+
 
 void getInfoFromFile(std::string filename, double buffer[])
 {
