@@ -37,29 +37,29 @@
 // #include <string>
 // #include <iomanip>
 // #include<fstream>
-#include <cmath>
+// #include <cmath>
+// 
+// // C old headers
+// // #include <stdio.h>
+// // #include <stdlib.h>
+// #include <unistd.h>
+// 
+// // GSL Headers
+// #include<gsl/gsl_odeiv2.h>
+// #include<gsl/gsl_errno.h>
+// 
+// 
+// // MathGL Headers
+// #include<mgl/mgl.h>
+// #include <mgl/mgl_zb.h>
+// #include <mgl/mgl_eps.h>
+// #include <mgl/mgl_data.h>
+// 
+// #include "getInfoFromFile.hpp"
+// #include "HH_GatingFunctions.hpp"
+// #include "HH_Model_ODES.hpp"
 
-// C old headers
-// #include <stdio.h>
-// #include <stdlib.h>
-#include <unistd.h>
-
-// GSL Headers
-#include<gsl/gsl_odeiv2.h>
-#include<gsl/gsl_errno.h>
-
-
-// MathGL Headers
-#include<mgl/mgl.h>
-#include <mgl/mgl_zb.h>
-#include <mgl/mgl_eps.h>
-#include <mgl/mgl_data.h>
-
-#include "getInfoFromFile.hpp"
-#include "HH_GatingFunctions.hpp"
-#include "HH_Model_ODES.hpp"
-
-
+#include "HH_Includes.hpp"
 
 
 // ==========================================================================
@@ -203,7 +203,7 @@ int main(int argc, char **argv){
 // vK  = 12;
     
     parametros[0]=0.01;   // Membrane capacitance
-    parametros[1]=0.1;    // induced current on axon, 0 means no external current
+    parametros[1]=0.0;    // induced current on axon, 0 means no external current
     parametros[2]=1.20;   // Na conductances
     parametros[3]=55.17;  // Na Nernst Potential
     parametros[4]=0.36;   // K Conductance

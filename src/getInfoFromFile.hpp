@@ -28,10 +28,20 @@
     
 */
 
-#include <iostream>
-#include <string>
-#include <iomanip>
-#include<fstream>
+#ifndef IOSTREAM_H
+    #include <iostream>
+    #define IOSTREAM_H
+#endif 
+
+#ifndef  SSTRING_H
+  #include <string>
+  #define SSTRING_H
+#endif
+
+#ifndef FSTREAM_H
+    #include<fstream>
+    #define FSTREAM_H
+#endif
 
 
 void getInfoFromFile(std::string filename, double buffer[])
