@@ -7,13 +7,13 @@
       
        AUTHOR: Daniel Mejia Raigosa
        E-MAIL: danielmejia55@gmail.com
-       GITHUB: http://github.com/Daniel-M/
+       GITHUB: http://github.com/Daniel-M/Hodgking-Huxley
          DATE: 13 Sept 2012
       VERSION: 1.0
     
     LICENSE
     
-    This file is part of "HH-model".
+    This file is part of "Hodgking-Huxley".
 
     "HH-model.cpp" is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -55,134 +55,12 @@
 #include <mgl/mgl_eps.h>
 #include <mgl/mgl_data.h>
 
+#include "getInfoFromFile.hpp"
+#include "HH_GatingFunctions.hpp"
+#include "HH_Model_ODES.hpp"
 
 
 
-// ===============================================================================
-//  Define some prototypes for functions 
-// ===============================================================================
-
-void getInfoFromFile(std::string filename, double buffer[])
-{
-    std::ifstream data;
-    char sBuffer[20];
-    int i=0;
-    
-
-    data.open (filename.c_str(), std::ifstream::in);
-  
-    while(data.eof()!=true)
-    {
-	data.getline(sBuffer,20);
-	buffer[i]=atof(sBuffer);
-	i++;
-    }
-   
-       data.close();
-}
-
-// ===============================================================================
-//  Defining some auxiliary "gating functions" for the Hodgking Huxley Model
-// 	These are taken from book "Nonlinear dynamics in physiology and medicine"
-// 	From Anne Beuter et al.
-// 	Chapter 4 - Excitable cells, pp 104
-// ===============================================================================
-
-double alpha_n(double V)
-{
-     return (0.01*(V+50.0))/(1.0-exp(-(V+50.0)/10.0));
-}
-
-double beta_n(double V)
-{
-     return 0.125*exp(-(V+60.0)/80.0);
-}
-
-
-double alpha_m(double V)
-{
-     return (0.1*(V+35.0))/(1-exp(-(V+35.0)/10.0));
-}
-
-double beta_m(double V)
-{
-     return 4.0*exp(-(V+60.0)/18.0);
-}
-
-
-double alpha_h(double V)
-{
-     return 0.07*exp(-(V+60.0)/20.0);
-}
-
-double beta_h(double V)
-{
-     return 1.0/(1.0+exp(-(V+30.0)/10.0));
-}
-
-
-// ===============================================================================
-//  Defining some auxiliary "gating functions" for the Hodgking Huxley Model
-// 	These are taken from book "Mathematical aspects of the Hodgking-Huxley
-// 	Neural theory"
-// 	From Janne Cronin
-// 	Chapter 2.3 - The work of Hodgking-Huxley, pp 50-52
-// ===============================================================================
-/*
-double alpha_n(double V)
-{
-     return (0.01*(V+10.0))/(exp((V+10.0)/10.0)-1.0);
-}
-
-double beta_n(double V)
-{
-     return 0.125*exp(V/80.0);
-}
-
-
-double alpha_m(double V)
-{
-     return (0.1*(V+25.0))/(exp((V+25.0)/10.0)-1.0);
-}
-
-double beta_m(double V)
-{
-     return 4.0*exp(V/18.0);
-}
-
-
-double alpha_h(double V)
-{
-     return 0.07*exp(V/20.0);
-}
-
-double beta_h(double V)
-{
-     return 1.0/(1.0+exp((V+30.0)/10.0));
-}*/
-
-
-
-// ==========================================================================
-//     Defining the ODE system for the Hodgking Huxley Model
-// ==========================================================================
-
-
-int HH_Model (double t, const double y[], double f[], void *params){
-  
- 
-   double *k=(double*)params;;
- 
-  
-	f[0]=(1/k[0])*(k[1]-k[2]*pow(y[1],3)*y[2]*(y[0]-k[3])-k[4]*pow(y[3],4)*(y[0]-k[5])-k[6]*(y[0]-k[7]));
-	f[1]=alpha_m(y[0])*(1-y[1])-beta_m(y[0])*y[1];
-	f[2]=alpha_h(y[0])*(1-y[2])-beta_h(y[0])*y[2];
-	f[3]=alpha_n(y[0])*(1-y[3])-beta_n(y[0])*y[3];
-
-  return GSL_SUCCESS;
-  
-  /* ALWAYS Must Return GSL_SUCCESS ! */
-}
 
 // ==========================================================================
 // 			MAIN CODE
