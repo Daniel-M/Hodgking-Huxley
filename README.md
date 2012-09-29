@@ -15,7 +15,7 @@ HH-Model
 >You'll need MathGL, GSL, Libraries  
 
 ##### TO DO:
-* Sepparate ionic currents in different plots and data files   
+* Plot the ionic currents to a png     
 
 ##### EVENTS:
 >* 19-Sept-2012	Repository created  
