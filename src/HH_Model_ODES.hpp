@@ -36,7 +36,7 @@
 int HH_Model (double t, const double y[], double f[], void *params){
   
  
-   double *k=(double*)params;;
+   double *k=(double*)params;
  
   
     f[0]=(1/k[0])*(k[1]-k[2]*pow(y[1],3)*y[2]*(y[0]-k[3])-k[4]*pow(y[3],4)*(y[0]-k[5])-k[6]*(y[0]-k[7]));

@@ -75,6 +75,13 @@
 #endif
 
 
+
+#ifndef MGL_ZB_H
+    #include "mglGraphicsZB.hpp"
+    #define MGL_ZB_H
+#endif
+
+
 // MathGL Headers
 #ifndef MATHGL_H
     #include<mgl/mgl.h>
