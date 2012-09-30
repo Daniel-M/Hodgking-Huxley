@@ -70,7 +70,7 @@
 int main(int argc, char **argv){
 
     int POINTS=250;
-    char verbosity='n',gengraphs='g', automatic='n';
+    char verbosity='n',gengraphs='g', automatic='y';
     
     std::string paramfile = "parameters.txt";
     std::string iniconfile = "init_cond.txt";
@@ -120,17 +120,21 @@ int main(int argc, char **argv){
 	while ((c = getopt(argc, argv, "hvgAt:p:k:i:b:e:")) != -1)
 	  switch (c)  {
 	  case 'h':
-	    std::cout << "\nUsage: %s [options] \n" << argv[0] << std::endl;
-	    std::cout <<"\t-h  : this help message"<< std::endl;
-	    std::cout <<"\t-v  : set verbosity level,(No verbosity by default)"<< std::endl;
+	    std::cout << "\nUsage: \n" << argv[0] << " [options] \n" << std::endl;
+//	    std::cout << "  [i]If no options are given, the -A flag is used by default\n" << std::endl;
+	    std::cout <<"\t-h  : This help message"<< std::endl;
+	    std::cout <<"\t-v  : Set verbosity level,(No verbosity by default)"<< std::endl;
 	    std::cout <<"\t-g  : Don't generate PNG graphics,(Graphics by default)"<< std::endl;
-        std::cout <<"\t-A  : Automatic parameter and initial conditions (Built-in defaults)"<< std::endl;
-        std::cout <<"\t-t# : integrate from zero to # (In milliseconds),(Default= " << tf << ")" << std::endl;
-	    std::cout <<"\t-p# : set number of points used (Default " << POINTS << ")" << std::endl;
-	    std::cout <<"\t-i@ : initial conditions file [-ifilename.ext] (Default \"" << iniconfile << "\")" << std::endl;
-	    std::cout <<"\t-k@ : parameters file [-kfilename.ext] (Default \"" << paramfile << "\")" << std::endl;
-	    std::cout <<"\t-b@ : set basename for output files [-bbasename] (Default \"" << basefile << "\")" << std::endl;
-	    std::cout <<"\t-e@ : set extension for basename output files [-eext = basename.ext] (Default \"" << ext << "\")" << std::endl;
+            std::cout <<"\t-A  : Automatic parameters and initial conditions (using built-in defaults)"<< std::endl;
+            std::cout <<"\t-t# : Integrate from zero to # (In milliseconds),(Default= " << tf << ")" << std::endl;
+	    std::cout <<"\t-p# : Set number of points used (Default " << POINTS << ")" << std::endl;
+	    std::cout <<"\t-i@ : Initial conditions file [-i filename.ext] (Default \"" << iniconfile << "\")" << std::endl;
+	    std::cout <<"\t-k@ : Parameters file [-kfilename.ext] (Default \"" << paramfile << "\")" << std::endl;
+	    std::cout <<"\t-b@ : Set basename for output files [-b basename] (Default \"" << basefile << "\")" << std::endl;
+	    std::cout <<"\t-e@ : Set extension for basename output files [-e ext = basename.ext] (Default \"" << ext << "\")" << std::endl;
+
+	    std::cout << "\nNOTE: If no options are given, the -A flag is used by default\n" << std::endl;
+
 	    std::cout << std::endl;
 
 	    exit(1);
@@ -142,19 +146,21 @@ int main(int argc, char **argv){
 	  case 'g':  gengraphs='n';
 	    break;
         
-      case 'A':  automatic='y'; // Automatic mode
+	  case 'A':  automatic='y'; // Automatic mode
         break;
 
-      case 't': tf=atof(optarg);
+	  case 't': tf=atof(optarg);
 	    break;
 
 	  case 'p': POINTS = atoi(optarg);
 	    break;
 	   
-	  case 'i': iniconfile.assign(optarg); 
+	  case 'i': iniconfile.assign(optarg);
+		automatic='n'; //Disable automode 
 	    break;
 	    
 	  case 'k': paramfile.assign(optarg);
+		automatic='n'; //Disable automode 
 
 	    break;
 	    
