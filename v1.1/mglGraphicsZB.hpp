@@ -36,11 +36,11 @@ void mglGeneratePNG(void *k, int POINTS, std::string basefile,std::string ext)
     
         sprintf(parametroCm,"\\C_{m} = %.3lf \\mF",parametros[0]);
         sprintf(parametroI,"\\I_{injected} = %.3lf \\mA",parametros[1]);
-        sprintf(parametrogNa,"\\g_{Na} = %.3lf \\mMho",parametros[2]);
+        sprintf(parametrogNa,"\\g_{Na} = %.3lf \\dMho",parametros[2]);
         sprintf(parametrovNa,"\\E_{Na} = %.3lf \\mV",parametros[3]);
-        sprintf(parametrogK,"\\g_{K} = %.3lf \\mMho",parametros[4]);
+        sprintf(parametrogK,"\\g_{K} = %.3lf \\dMho",parametros[4]);
         sprintf(parametrovK,"\\E_{K} = %.3lf \\mV",parametros[5]);
-        sprintf(parametrogL,"\\g_{L} = %.3lf \\mMho",parametros[6]);
+        sprintf(parametrogL,"\\g_{L} = %.3lf \\dMho",parametros[6]);
         sprintf(parametrovL,"\\E_{L} = %.3lf \\mV",parametros[7]);
         sprintf(parametroP,"Points = %i",POINTS);
  
