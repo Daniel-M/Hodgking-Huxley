@@ -105,7 +105,7 @@ int main(int argc, char **argv){
     double eps_abs = 1.e-8;	// absolute error requested 
     double eps_rel = 1.e-10;	// relative error requested 
     double t=0.0;       // Starting time, this variable is a "time buffer"
-    double tf=25.0;	// 25 ms for time integration
+    double tf=25.0e-3;	// 25 ms for time integration
  
 
 
@@ -202,7 +202,7 @@ int main(int argc, char **argv){
 // Initial conditions AUTOMATED
 // ==========================================================================
 
-    y[0]=-60;   // Initial transmembrane potential, assuming resting potential
+    y[0]=-60e-3;   // Initial transmembrane potential, assuming resting potential (-60 mV)
     y[1]=0;     // Gating functions
     y[2]=0;  // Gating functions
     y[3]=0;  // Gating functions
@@ -221,14 +221,25 @@ int main(int argc, char **argv){
 // vL  = 10.613;
 // vK  = 12;
     
-    parametros[0]=0.01;   // Membrane capacitance
-    parametros[1]=0.1;    // induced current on axon, 0 means no external current
-    parametros[2]=1.20;   // Na conductances
-    parametros[3]=55.17;  // Na Nernst Potential
-    parametros[4]=0.36;   // K Conductance
-    parametros[5]=-72.14; // K Nernst Potential
-    parametros[6]=0.003;  // Leakage conductance (Due to a Cl current)
-    parametros[7]=-49.42; // Leakage Nernst potential (Due to a Cl current)
+//     parametros[0]=0.01;   // Membrane capacitance
+//     parametros[1]=0.1;    // induced current on axon, 0 means no external current
+//     parametros[2]=1.20;   // Na conductances
+//     parametros[3]=55.17;  // Na Nernst Potential
+//     parametros[4]=0.36;   // K Conductance
+//     parametros[5]=-72.14; // K Nernst Potential
+//     parametros[6]=0.003;  // Leakage conductance (Due to a Cl current)
+//     parametros[7]=-49.42; // Leakage Nernst potential (Due to a Cl current)
+    
+    
+    parametros[0]=1e-6;   // Membrane capacitance
+    parametros[1]=1e-9;    // induced current on axon, 0 means no external current
+    parametros[2]=120e-3;   // Na conductances
+    parametros[3]=55.17e-3;  // Na Nernst Potential
+    parametros[4]=36e-3;   // K Conductance
+    parametros[5]=-72.14e-3; // K Nernst Potential
+    parametros[6]=0.3e-3;  // Leakage conductance (Due to a Cl current)
+    parametros[7]=-49.42e-3; // Leakage Nernst potential (Due to a Cl current)
+    
     
     
         
