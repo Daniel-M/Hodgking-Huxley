@@ -80,20 +80,20 @@ int main(int argc, char **argv){
     std::string out_datafile = basefile + "." + ext;
     
     
-    std::ofstream hh_data(out_datafile.c_str());
+     std::ofstream hh_data(out_datafile.c_str());
     
     
-//     out_datafile = basefile + "-Cm_current" + "." + ext;
-//     std::ofstream CmCurrent_data(out_datafile.c_str());
+     out_datafile = basefile + "-Cm_current" + "." + ext;
+     std::ofstream CmCurrent_data(out_datafile.c_str());
            
-    out_datafile = basefile + "-Na_current" + "." + ext;
-    std::ofstream NaCurrent_data(out_datafile.c_str());
-    
-    out_datafile = basefile + "-K_current" + "." + ext;
-    std::ofstream KCurrent_data(out_datafile.c_str());
-    
-    out_datafile = basefile + "-L_current" + "." + ext;
-    std::ofstream LCurrent_data(out_datafile.c_str());
+     out_datafile = basefile + "-Na_current" + "." + ext;
+     std::ofstream NaCurrent_data(out_datafile.c_str());
+     
+     out_datafile = basefile + "-K_current" + "." + ext;
+     std::ofstream KCurrent_data(out_datafile.c_str());
+     
+     out_datafile = basefile + "-L_current" + "." + ext;
+     std::ofstream LCurrent_data(out_datafile.c_str());
     
 // ==========================================================================
 
@@ -222,7 +222,7 @@ int main(int argc, char **argv){
 // vK  = 12;
     
     parametros[0]=0.01;   // Membrane capacitance
-    parametros[1]=0.1;    // induced current on axon, 0 means no external current
+    parametros[1]=0;    // induced current on axon, 0 means no external current
     parametros[2]=1.20;   // Na conductances
     parametros[3]=55.17;  // Na Nernst Potential
     parametros[4]=0.36;   // K Conductance
@@ -345,16 +345,16 @@ int main(int argc, char **argv){
        {     
 
             int status=gsl_odeiv2_step_apply(step_ptr,t,h_step,y,yerr,NULL,NULL,&HH_Model_odes);
-	    
+// 	    
             std::cout << t << "\t" << y[0] << "\t" << y[1] << "\t" << y[2] << "\t" << y[3] << std::endl;
-	    
+// 	    
             hh_data << t << "\t" << y[0] << "\t" << y[1] << "\t" << y[2] << "\t" << y[3] << std::endl;
             // 	    Individual currents
             NaCurrent_data << t << "\t" << parametros[2]*pow(y[1],3)*y[2]*(y[0]-parametros[3]) << std::endl;
             KCurrent_data  << t << "\t" <<  parametros[4]*pow(y[3],4)*(y[0]-parametros[5]) << std::endl;
             LCurrent_data  << t << "\t" <<  parametros[6]*(y[0]-parametros[7]) << std::endl;
-	    
-//             t=t+h_step;
+// 	    
+            t=t+h_step;
     
        }
     
@@ -366,14 +366,16 @@ int main(int argc, char **argv){
      
 
             int status=gsl_odeiv2_step_apply(step_ptr,t,h_step,y,yerr,NULL,NULL,&HH_Model_odes);
-
-            hh_data << t << "\t" << y[0] << "\t" << y[1] << "\t" << y[2] << "\t" << y[3] << std::endl;
-	    
+ 
+             hh_data << t << "\t" << y[0] << "\t" << y[1] << "\t" << y[2] << "\t" << y[3] << std::endl;
+ 	    
 // 	        Individual currents
-// 	        Cm_Current_data << t << "\t" <<  << std::endl;
-            NaCurrent_data << t << "\t" << parametros[2]*pow(y[1],3)*y[2]*(y[0]-parametros[3]) << std::endl;
-            KCurrent_data << t << "\t" <<  parametros[4]*pow(y[3],4)*(y[0]-parametros[5]) << std::endl;
-            LCurrent_data << t << "\t" <<  parametros[6]*(y[0]-parametros[7]) << std::endl;
+
+             NaCurrent_data << t << "\t" << parametros[2]*pow(y[1],3)*y[2]*(y[0]-parametros[3]) << std::endl;
+             KCurrent_data << t << "\t" <<  parametros[4]*pow(y[3],4)*(y[0]-parametros[5]) << std::endl;
+             LCurrent_data << t << "\t" <<  parametros[6]*(y[0]-parametros[7]) << std::endl;
+	     
+	     CmCurrent_data << t << "\t" << - (parametros[2]*pow(y[1],3)*y[2]*(y[0]-parametros[3])  + parametros[4]*pow(y[3],4)*(y[0]-parametros[5]) + parametros[6]*(y[0]-parametros[7]))  << std::endl;
 
             t=t+h_step;
 
@@ -386,6 +388,8 @@ int main(int argc, char **argv){
         mglGeneratePNG(parametros, POINTS, basefile + "-Na_current",ext);
         mglGeneratePNG(parametros, POINTS, basefile + "-K_current",ext);
         mglGeneratePNG(parametros, POINTS, basefile + "-L_current",ext);
+        mglGeneratePNG(parametros, POINTS, basefile + "-Cm_current",ext);
+
     }  
 
 exit(0);

@@ -1,10 +1,8 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8.0)
 
-
 INCLUDE_DIRECTORIES( include )
 
 #ADD_DEFINITIONS( -std=c++0x )
-#ADD_DEFINITIONS( -std=c++0x -lmgl)
 
 #add_library(customer SHARED
 #include/Customer.hpp
