@@ -30,7 +30,8 @@ You'll need MathGL (v 1.11) and GSL (v 1.15) development libraries installed
 
 ##### LICENSE
     
-<one line to give the program's name and a brief idea of what it does.>
+The Hodgking-Huxey project consist of a very basic GSL implementation to solve the 
+Hodgking-Huxey ODE model that simulates an Action Potential for squid axon of Loligo Pelei
 Copyright (C) 2012-2013  Daniel Mejía R. [danielmejia55@gmail.com](mailto:danielmejia55@gmail.com) 
 
 "Hodgking-Huxley" is free software: you can redistribute it and/or modify
