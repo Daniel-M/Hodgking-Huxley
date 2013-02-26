@@ -203,9 +203,9 @@ int main(int argc, char **argv){
 // ==========================================================================
 
     y[0]=-60;   // Initial transmembrane potential, assuming resting potential (-60 mV)
-    y[1]=0;     // Gating functions
-    y[2]=0;  // Gating functions
-    y[3]=0;  // Gating functions
+    y[1]=0;     // Gating function m
+    y[2]=0;  // Gating function h
+    y[3]=0;  // Gating function n
     
     
 // # Membrane capacitance in Farads
@@ -353,7 +353,8 @@ int main(int argc, char **argv){
             NaCurrent_data << t << "\t" << parametros[2]*pow(y[1],3)*y[2]*(y[0]-parametros[3]) << std::endl;
             KCurrent_data  << t << "\t" <<  parametros[4]*pow(y[3],4)*(y[0]-parametros[5]) << std::endl;
             LCurrent_data  << t << "\t" <<  parametros[6]*(y[0]-parametros[7]) << std::endl;
-// 	    
+	    
+	    CmCurrent_data << t << "\t" << parametros[0] - ( parametros[2]*pow(y[1],3)*y[2]*(y[0]-parametros[3])  + parametros[4]*pow(y[3],4)*(y[0]-parametros[5]) + parametros[6]*(y[0]-parametros[7]) )  << std::endl;
             t=t+h_step;
     
        }
@@ -375,7 +376,7 @@ int main(int argc, char **argv){
              KCurrent_data << t << "\t" <<  parametros[4]*pow(y[3],4)*(y[0]-parametros[5]) << std::endl;
              LCurrent_data << t << "\t" <<  parametros[6]*(y[0]-parametros[7]) << std::endl;
 	     
-	     CmCurrent_data << t << "\t" << - (parametros[2]*pow(y[1],3)*y[2]*(y[0]-parametros[3])  + parametros[4]*pow(y[3],4)*(y[0]-parametros[5]) + parametros[6]*(y[0]-parametros[7]))  << std::endl;
+	     CmCurrent_data << t << "\t" << parametros[0] - ( parametros[2]*pow(y[1],3)*y[2]*(y[0]-parametros[3])  + parametros[4]*pow(y[3],4)*(y[0]-parametros[5]) + parametros[6]*(y[0]-parametros[7]) )  << std::endl;
 
             t=t+h_step;
 
