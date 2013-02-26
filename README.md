@@ -7,7 +7,8 @@ HH-Model
 ##### E-MAIL:		[danielmejia55@gmail.com](mailto:danielmejia55@gmail.com)  
 ##### DESCRIPTION:  
 C++ code to simulate the action potetial's for an axon of a Loligo Pelei squid using the  
-Hodgking-Huxley's ODE system proposed on 50's decade papers  
+Hodgking-Huxley's ODE system proposed on 50's decade papers.  
+See the [wiki](https://github.com/Daniel-M/Hodgking-Huxley/wiki) for more info
 
 ##### USAGE NOTES:  
 
