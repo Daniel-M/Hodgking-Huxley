@@ -132,6 +132,7 @@ int main(int argc, char **argv){
 	    std::cout <<"\t-k@ : Parameters file [-kfilename.ext] (Default \"" << paramfile << "\")" << std::endl;
 	    std::cout <<"\t-b@ : Set basename for output files [-b basename] (Default \"" << basefile << "\")" << std::endl;
 	    std::cout <<"\t-e@ : Set extension for basename output files [-e ext = basename.ext] (Default \"" << ext << "\")" << std::endl;
+// 	    std::cout <<"\t-m@ : Set method for solving system [-e ext = basename.ext] (Default \"" << ext << "\")" << std::endl;
 
 	    std::cout << "\nNOTE: If no options are given, the -A flag is used by default\n" << std::endl;
 
@@ -290,7 +291,7 @@ int main(int argc, char **argv){
   // some other possibilities (see GSL manual):          
   //   = gsl_odeiv2_step_rk2  - Runge Kutta (2,3) Method
   //   = gsl_odeiv2_step_rk4  - 4th Order Runge Kutta Method (The Classical)
-  //   = gsl_odeiv2_step_rk45 - Runge-Kutta-Fehlberg (4,5) Method (General Purpose, GSL Recommended)
+  //   = gsl_odeiv2_step_rkf45 - Runge-Kutta-Fehlberg (4,5) Method (General Purpose, GSL Recommended)
   //   = gsl_odeiv2_step_rkck - Runge- Kutta Cash-Karp (4,5) Method
   //   = gsl_odeiv2_step_rk8pd - Runge- Kutta Prince-Dormand (8,9) Method (defined here by default)
   //   = gsl_odeiv_step_rk4imp;
@@ -348,7 +349,7 @@ int main(int argc, char **argv){
 // 	    
             std::cout << t << "\t" << y[0] << "\t" << y[1] << "\t" << y[2] << "\t" << y[3] << std::endl;
 // 	    
-            hh_data << t << "\t" << y[0] << "\t" << y[1] << "\t" << y[2] << "\t" << y[3] << std::endl;
+            hh_data << t << "\t" << y[0] /*<< "\t" << y[1] << "\t" << y[2] << "\t" << y[3]*/ << std::endl;
             // 	    Individual currents
             NaCurrent_data << t << "\t" << parametros[2]*pow(y[1],3)*y[2]*(y[0]-parametros[3]) << std::endl;
             KCurrent_data  << t << "\t" <<  parametros[4]*pow(y[3],4)*(y[0]-parametros[5]) << std::endl;
@@ -368,7 +369,7 @@ int main(int argc, char **argv){
 
             int status=gsl_odeiv2_step_apply(step_ptr,t,h_step,y,yerr,NULL,NULL,&HH_Model_odes);
  
-             hh_data << t << "\t" << y[0] << "\t" << y[1] << "\t" << y[2] << "\t" << y[3] << std::endl;
+             hh_data << t << "\t" << y[0] /*<< "\t" << y[1] << "\t" << y[2] << "\t" << y[3] */<< std::endl;
  	    
 // 	        Individual currents
 
@@ -385,11 +386,11 @@ int main(int argc, char **argv){
    
    if(gengraphs!='n')
     {
-        mglGeneratePNG(parametros, POINTS, basefile,ext);
-        mglGeneratePNG(parametros, POINTS, basefile + "-Na_current",ext);
-        mglGeneratePNG(parametros, POINTS, basefile + "-K_current",ext);
-        mglGeneratePNG(parametros, POINTS, basefile + "-L_current",ext);
-        mglGeneratePNG(parametros, POINTS, basefile + "-Cm_current",ext);
+        mglGeneratePNG(parametros, POINTS,"\\V_{membrane} (mV)", basefile,ext);
+        mglGeneratePNG(parametros, POINTS,"\\I_{Na} (mA)", basefile + "-Na_current",ext);
+        mglGeneratePNG(parametros, POINTS,"\\I_{K} (mA)", basefile + "-K_current",ext);
+        mglGeneratePNG(parametros, POINTS,"\\I_{Leak} (mA)", basefile + "-L_current",ext);
+        mglGeneratePNG(parametros, POINTS,"\\I_{Capacitive} (mA)", basefile + "-Cm_current",ext);
 
     }  
 

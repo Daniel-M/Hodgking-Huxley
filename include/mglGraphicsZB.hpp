@@ -16,7 +16,7 @@
 // ==========================================================================
 // ==========================================================================
 
-void mglGeneratePNG(void *k, int POINTS, std::string basefile,std::string ext)
+void mglGeneratePNG(void *k, int POINTS,std::string sYAxis, std::string basefile,std::string ext)
 {
         double *parametros=(double*)k;
         
@@ -117,7 +117,7 @@ void mglGeneratePNG(void *k, int POINTS, std::string basefile,std::string ext)
 //  font size is 1.4 times larger than the one for ticks FontSize (see section Font settings). See section Text printing. 
     
     gr->Label('x',"Time(ms)",0,5);
-    gr->Label('y',"\\V_{membrane} (mV)",0,5.5);  // This will be rotated along the y-axis, see line 450
+    gr->Label('y',sYAxis.c_str(),0,5.5);  // This will be rotated along the y-axis, see line 450
     
     gr->SetRotatedText(false); // Now the text will not rotate, for tick number on y-axis
     
