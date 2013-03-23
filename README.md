@@ -20,6 +20,11 @@ Compile on Linux using
 
 You'll need MathGL (v 1.11) and GSL (v 1.15) development libraries installed  
 
+Use doxygen to build documentation  
+> $ doxygen HH-model.cfg  
+
+The directory "doc" will be created
+
 ##### TO DO:
 * Add OO style (it looks most like structured programming)
 * Add documentation
@@ -28,6 +33,7 @@ You'll need MathGL (v 1.11) and GSL (v 1.15) development libraries installed
 ##### EVENTS:
 >* 19-Sept-2012	Repository created 
 >* 23-Febr-2013 Repository structure changed, adding Cmake capabilities, marking proyect as ended  
+>* 22-March-2013 Adding doxygen documentation
 
 ##### LICENSE
     

@@ -26,8 +26,15 @@
 	You should have received a copy of the GNU General Public License
 	along with "HH-model.cpp". If not, see <http://www.gnu.org/licenses/>.
 */
+//\file getInfoFromFile.hpp
+/*! 
+ *  \brief Reads datafile and stores the data into _double_ array
+ */
 
-
+/*! \param filename The name of the file to be readed
+ *  \param buffer[] The target array where the data will be stored
+ * 
+ */
 
 void getInfoFromFile(std::string filename, double buffer[])
 {

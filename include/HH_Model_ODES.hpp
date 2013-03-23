@@ -28,10 +28,23 @@
     
 */
 
-// ==========================================================================
-//     Defining the ODE system for the Hodgking Huxley Model
-// ==========================================================================
-
+/* ==========================================================================
+/     Defining the ODE system for the Hodgking Huxley Model
+/ ==========================================================================*/
+//\file HH_Model_ODES.hpp 
+/*!
+ * \brief Defines the ODE system proposed by Hodgking and Huxley
+ */
+  
+/*!
+ * \param t Time instant
+ * \param y[] This array stores the solution of the previous iterarion
+ * \param f[] This array stores the result of the actual iteration (the derivatives)
+ * \param *params The array that stores the ODE constants, that is, the model parameters
+ * 
+ * \return Must always return GSL_SUCCESS 
+ * 
+ */
 
 int HH_Model (double t, const double y[], double f[], void *params){
   

@@ -8,13 +8,30 @@
     #define MATHGL_H
 #endif
 
-// ==========================================================================   
-// ==========================================================================
-// ==========================================================================
-//   MathGL Graphics generation (on a PNG file)
-// ========================================================================== 
-// ==========================================================================
-// ==========================================================================
+/* ==========================================================================   
+/ ==========================================================================
+/ ==========================================================================
+/   MathGL Graphics generation (on a PNG file)
+/ ========================================================================== 
+/ ==========================================================================
+/ ==========================================================================*/
+//\file mglGraphicsZB.hpp
+/*! 
+ * \brief Here ir were the data plotting it's done.
+ */ 
+
+/*! 
+ * \brief MathGL implementation to generate PNG graphics
+ * 
+ * \param *k stores numerical values of the used parameters on the HH-model
+ * \param POINT is the number of points used to generate the plots. Used only to put information on the key
+ * \param sYAxis stores the Y-Axis label
+ * \param basefile stores the basefile to name the PNG output
+ * \param ext stores the extension to search the input datafiles
+ * 
+ * So this class searches for files named _basefile.ext_ and then creates a _basefile-mgl.png_ file for each
+ * 
+ */
 
 void mglGeneratePNG(void *k, int POINTS,std::string sYAxis, std::string basefile,std::string ext)
 {
@@ -49,18 +66,18 @@ void mglGeneratePNG(void *k, int POINTS,std::string sYAxis, std::string basefile
 
 
     mglData y_mgl(out_datafile.c_str());    // Load data from created file
-    mglData xdat=y_mgl.SubData(0), ydat=y_mgl.SubData(1);   // Split data into x and y point coordinates
+    mglData xdat=y_mgl.SubData(0), ydat=y_mgl.SubData(1);   /// Split data into x and y point coordinates
     
-    gr->SetSize(1200,900);          //Set image size in pixels
+    gr->SetSize(1200,900);          ///gr->SetSize(1200,900) Set image size in pixels
 //  gr->SetSize(620,480);
-    gr->Transparent=false;          // Set transparency off
-    gr->XRange(xdat);   gr->YRange(ydat); // for v.1.*
-      //gr->SetRanges(xdat,ydat); // for v.2.*
+    gr->Transparent=false;          ///gr->Transparent=false Set transparency off
+    gr->XRange(xdat);   gr->YRange(ydat); ///gr->XRange(xdat);   gr->YRange(ydat); for MathGL v.1.*
+      //gr->SetRanges(xdat,ydat); /// for MathGL v.2.*
 
     
-    gr->Alpha(false);       // Set alpha off
-    gr->Light(true);        // Set light on
-    gr->SetMarkSize(0.0005);    // Set size of the marker, i.e. the dot size on plot
+    gr->Alpha(false);       /// gr->Alpha(false) Set alpha off
+    gr->Light(true);        /// gr->Light(true) Set light on
+    gr->SetMarkSize(0.0005);    /// gr->SetMarkSize(0.0005) Set size of the marker, i.e. the dot size on plot
     
 //  Set the title for the graph;
 //  The font parameters are described by string.
@@ -74,16 +91,16 @@ void mglGeneratePNG(void *k, int POINTS,std::string sYAxis, std::string basefile
 //  For example, string ‘iC:b’ correspond to italic font style for centered text 
 //  which printed by blue color. 
     
-    gr->Title("Hodgking-Huxley's action potential","iC",8); 
+    gr->Title("Hodgking-Huxley's action potential","iC",8);  /// gr->Title() Set the plot title, see MatgGL documentation
 
 //  gr->SubPlot(1,1,0,"^"); // Reserve aditional space only on the upper side  Default value is "<>_^" 
     
-    gr->SetFontSize(4); // Sets the global font size for the plot ticks and related
-    gr->SetFontDef("iC"); // Sets the font i-italic and Centered
-    gr->SetRotatedText(true);  // Allow text rotating, for instance, the y-axis label will bi rotated
+    gr->SetFontSize(4);  /// gr->SetFontSize(4) Sets the global font size for the plot ticks and related
+    gr->SetFontDef("iC"); /// gr->SetFontDef("iC") Sets the font i-italic and Centered
+    gr->SetRotatedText(true);  /// gr->SetRotatedText(true) Allow text rotating, for instance, the y-axis label will bi rotated
     
-//  Addig legend tags, the order of appareance is inverse, so the last line on the legend will be given by parametroP
-    gr->AddLegend(parametroP," ");
+    
+    gr->AddLegend(parametroP," "); ///  gr->AddLegend(parametroP," ") Adding legend tags, the order of appareance is inverse, so the last line on the legend will be given by parametroP
     gr->AddLegend(parametrovL," ");
     gr->AddLegend(parametrogL," ");
     gr->AddLegend(parametrovK," ");
@@ -96,7 +113,7 @@ void mglGeneratePNG(void *k, int POINTS,std::string sYAxis, std::string basefile
             
     gr->AddLegend("HH Model Parameters","");
     
-    gr->Legend(/*1,1,"iL",2.7*/); //put the legend in 0,0, wiht font size 2.3
+    gr->Legend(/*1,1,"iL",2.7*/); ///gr->Legend() put the legend in 0,0, with font size 2.3
     
 //  gr->SubPlot(1,1,0,"^"); // Reserve aditional space only on the upper side  Default value is "<>_^" 
     
@@ -107,7 +124,7 @@ void mglGeneratePNG(void *k, int POINTS,std::string sYAxis, std::string basefile
 //  Parameter fact add additional range increase on value (Max-Min)*fact.
 //  See also Axis(). 
 
-    gr->XRange(xdat,false,0);   // Set the data ranges
+    gr->XRange(xdat,false,0);   /// gr->XRange(xdat,false,0) Set the data ranges
     gr->YRange(ydat,false,0.1);
     
 //  Setup axes labels and ticks the syntax is Label (char dir, const char *text, float pos=0, float size=-1.4, float shift=0)
@@ -117,24 +134,24 @@ void mglGeneratePNG(void *k, int POINTS,std::string sYAxis, std::string basefile
 //  font size is 1.4 times larger than the one for ticks FontSize (see section Font settings). See section Text printing. 
     
     gr->Label('x',"Time(ms)",0,5);
-    gr->Label('y',sYAxis.c_str(),0,5.5);  // This will be rotated along the y-axis, see line 450
+    gr->Label('y',sYAxis.c_str(),0,5.5);  /// gr->Label('y',sYAxis.c_str(),0,5.5) This will be rotated along the y-axis, see line 450
     
-    gr->SetRotatedText(false); // Now the text will not rotate, for tick number on y-axis
+    gr->SetRotatedText(false); /// gr->SetRotatedText(false) Now the text will not rotate, for tick number on y-axis
     
-    gr->AdjustTicks("xy");      // The numbers on ticks will be rotated along the x axis.
+    gr->AdjustTicks("xy");      /// gr->AdjustTicks("xy") The numbers on ticks will be rotated along the x axis.
     gr->Axis();         
         
     
-    gr->Box(); // The bounding box. Note that putting this on a line before SubPlot will give an unbounded graph (box undersized)
+    gr->Box(); /// gr->Box() The bounding box. Note that putting this on a line before SubPlot will give an unbounded graph (box undersized)
     
-    gr->Plot(xdat,ydat,"r-"); // Make the plot, the r- are the options, r-red, and - for solid line
+    gr->Plot(xdat,ydat,"r-"); /// gr->Plot(xdat,ydat,"r-") Make the plot, the r- are the options, r-red, and - for solid line
     
 //  gr->Plot(xdat,ydat,"r#o "); // Make the plot, the r#o are the options, red, and #o for "special" dots see documentation
     
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     out_datafile = basefile + "_mgl.png";
-    gr->WritePNG(out_datafile.c_str(),"",false); // put the plot on a PNG file
-    delete gr;  // Destroy the plot on memory
+    gr->WritePNG(out_datafile.c_str(),"",false); ///gr->WritePNG(out_datafile.c_str(),"",false) put the plot on a PNG file
+    delete gr;  /// delete gr Destroy the plot on memory
 
 }
 

@@ -65,7 +65,10 @@
 // ==========================================================================
 // 			MAIN CODE
 // ==========================================================================
-
+//\file HH-model.cpp
+/*! 
+ *  \brief The Main function of the model
+ */
 
 int main(int argc, char **argv){
 
@@ -97,15 +100,15 @@ int main(int argc, char **argv){
     
 // ==========================================================================
 
-    double y[4]; // Stores the solutions, y[0] will be Membrane mV y[1] will be m y[2] will be h and y[3] will be n
-    double yerr[4]; // Stores the errors
-    double h_step;  // This will be the h_step for integrate, will be redefined on line 333
-    double parametros[8]; // Here one stores the ODES parameters for solvig, i.e membrane capacitance, conductances and so on
+    double y[4]; /// y[4] Stores the solutions, y[0] will be Membrane mV y[1] will be m y[2] will be h and y[3] will be n
+    double yerr[4]; /// yerr[4] Stores the  numerical error
+    double h_step;  /// h_step This will be the h_step for integrate, will be redefined on line 333
+    double parametros[8]; /// parametros[8] Here one stores the ODES parameters for solvig, i.e membrane capacitance, conductances and so on
     
-    double eps_abs = 1.e-8;	// absolute error requested 
-    double eps_rel = 1.e-10;	// relative error requested 
-    double t=0.0;       // Starting time, this variable is a "time buffer"
-    double tf=25.0;	// 25 ms for time integration
+    double eps_abs = 1.e-8;	/// eps_abs absolute error requested
+    double eps_rel = 1.e-10;	/// eps_rel relative error requested
+    double t=0.0;       /// t Starting time, this variable is a "time buffer"
+    double tf=25.0;	/// tf 25 ms for time integration
  
 
 
@@ -203,10 +206,10 @@ int main(int argc, char **argv){
 // Initial conditions AUTOMATED
 // ==========================================================================
 
-    y[0]=-60;   // Initial transmembrane potential, assuming resting potential (-60 mV)
-    y[1]=0;     // Gating function m
-    y[2]=0;  // Gating function h
-    y[3]=0;  // Gating function n
+    y[0]=-60;   // Initial transmembrane potential, assuming resting potential (-60 mV) *when automated* [-A flag]
+    y[1]=0;     // Initial state for Gating function m *when automated* [-A flag]
+    y[2]=0;  // Initial state for Gating function h *when automated* [-A flag]
+    y[3]=0;  // Initial state for Gating function n *when automated* [-A flag]
     
     
 // # Membrane capacitance in Farads
@@ -222,14 +225,14 @@ int main(int argc, char **argv){
 // vL  = 10.613;
 // vK  = 12;
     
-    parametros[0]=0.01;   // Membrane capacitance
-    parametros[1]=0;    // induced current on axon, 0 means no external current
-    parametros[2]=1.20;   // Na conductances
-    parametros[3]=55.17;  // Na Nernst Potential
-    parametros[4]=0.36;   // K Conductance
-    parametros[5]=-72.14; // K Nernst Potential
-    parametros[6]=0.003;  // Leakage conductance (Due to a Cl current)
-    parametros[7]=-49.42; // Leakage Nernst potential (Due to a Cl current)
+    parametros[0]=0.01;   // Membrane capacitance  *when automated* [-A flag]
+    parametros[1]=0;    // induced current on axon, 0 means no external current *when automated* [-A flag]
+    parametros[2]=1.20;   // Na conductances *when automated* [-A flag]
+    parametros[3]=55.17;  // Na Nernst Potential *when automated* [-A flag]
+    parametros[4]=0.36;   // K Conductance *when automated* [-A flag]
+    parametros[5]=-72.14; // K Nernst Potential *when automated* [-A flag]
+    parametros[6]=0.003;  // Leakage conductance (Due to a Cl current) *when automated* [-A flag]
+    parametros[7]=-49.42; // Leakage Nernst potential (Due to a Cl current) *when automated* [-A flag]
     
     
 //     parametros[0]=1e-6;   // Membrane capacitance
@@ -286,27 +289,26 @@ int main(int argc, char **argv){
 
   // define the type of routine for making steps: 
   
-  const gsl_odeiv2_step_type *type_ptr = gsl_odeiv2_step_rk8pd;
+  const gsl_odeiv2_step_type *type_ptr = gsl_odeiv2_step_rk8pd; /// gsl_odeiv2_step_type Chooses the GSL stepping method
   
-  // some other possibilities (see GSL manual):          
-  //   = gsl_odeiv2_step_rk2  - Runge Kutta (2,3) Method
-  //   = gsl_odeiv2_step_rk4  - 4th Order Runge Kutta Method (The Classical)
-  //   = gsl_odeiv2_step_rkf45 - Runge-Kutta-Fehlberg (4,5) Method (General Purpose, GSL Recommended)
-  //   = gsl_odeiv2_step_rkck - Runge- Kutta Cash-Karp (4,5) Method
-  //   = gsl_odeiv2_step_rk8pd - Runge- Kutta Prince-Dormand (8,9) Method (defined here by default)
-  //   = gsl_odeiv_step_rk4imp;
-  //   = gsl_odeiv_step_bsimp;  
-  //   = gsl_odeiv_step_gear1;
-  //   = gsl_odeiv_step_gear2;
+  /// some other possibilities (see GSL manual):           
+  ///   gsl_odeiv2_step_rk2  - Runge Kutta (2,3) Method   
+  ///   gsl_odeiv2_step_rk4  - 4th Order Runge Kutta Method (The Classical)   
+  ///   gsl_odeiv2_step_rkf45 - Runge-Kutta-Fehlberg (4,5) Method (General Purpose, GSL Recommended)   
+  ///   gsl_odeiv2_step_rkck - Runge- Kutta Cash-Karp (4,5) Method   
+  ///   gsl_odeiv2_step_rk8pd - Runge- Kutta Prince-Dormand (8,9) Method (defined here by default)      
+  ///   gsl_odeiv_step_rk4imp;   
+  ///   gsl_odeiv_step_bsimp;    
+  ///   gsl_odeiv_step_gear1;   
+  ///   gsl_odeiv_step_gear2;   
 
-  // allocate/initialize the stepper, the control function, and the
-  //  evolution function.
+
   
-  gsl_odeiv2_step *step_ptr = gsl_odeiv2_step_alloc (type_ptr, 4);
+  gsl_odeiv2_step *step_ptr = gsl_odeiv2_step_alloc (type_ptr, 4);  // allocate/initialize the stepper, the control function, and the evolution function.
   gsl_odeiv2_control *control_ptr = gsl_odeiv2_control_y_new (eps_abs, eps_rel);
   gsl_odeiv2_evolve *evolve_ptr = gsl_odeiv2_evolve_alloc (4);
 
-  gsl_odeiv2_system HH_Model_odes;	// structure with the rhs function, etc. 
+  gsl_odeiv2_system HH_Model_odes;	// structure with the rigth-hand-side function, etc. 
     
   HH_Model_odes.dimension=4;
   HH_Model_odes.function=&HH_Model;
@@ -318,7 +320,7 @@ int main(int argc, char **argv){
   
 
   
-     /* The function "gsl_odeiv2_step_apply(step_ptr,t,h_step,y,yerr,NULL,NULL,&HH_Model_odes)"
+     /*! The function "gsl_odeiv2_step_apply(step_ptr,t,h_step,y,yerr,NULL,NULL,&HH_Model_odes)"
        applies the stepping function step_ptr to the system of equations deﬁned by HH_Model_odes,
        using the step-size h_step to advance the system from time t and state y to time t+h_step.
        The new state of the system is stored in y on output, with an estimate of the absolute 
@@ -328,7 +330,9 @@ int main(int argc, char **argv){
        allows the reuse of existing derivative information. On output the new derivatives of
        the system at time t+h_step will be stored in dydt_out if it is not null.
        
-       * Note that both dy/dt_in and dy/dt_out are defined as null below */ 
+       * Note that both dy/dt_in and dy/dt_out are defined as null below 
+       
+     */ 
      
 
 
