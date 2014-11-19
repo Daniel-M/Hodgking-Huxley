@@ -2,7 +2,7 @@ HH-Model
 ========
 
 ##### PROJECT NAME:	HH-Model (Hodgkin Huxley Model)  
-##### STATUS:		Ended (23 february 2013)    
+##### STATUS:		Ended (18 November 2014)    
 ##### AUTOR:		Daniel M.  
 ##### E-MAIL:		[danielmejia55@gmail.com](mailto:danielmejia55@gmail.com)  
 ##### DESCRIPTION:  
@@ -18,7 +18,7 @@ Compile on Linux using
 > $ cmake ..  
 > $ make  
 
-You'll need MathGL (v 1.11) and GSL (v 1.15) development libraries installed  
+You'll need MathGL (v 2.3) and LibBoost (v 1.55) development libraries installed  
 
 Use doxygen to build documentation  
 > $ doxygen HH-model.cfg  
@@ -34,12 +34,13 @@ The directory "doc" will be created
 >* 19-Sept-2012	Repository created 
 >* 23-Febr-2013 Repository structure changed, adding Cmake capabilities, marking proyect as ended  
 >* 22-March-2013 Adding doxygen documentation
+>* 18-Nov-2014 The numerical procedure uses Libboost Odeint, updating grapher to MathGL v 2.*
 
 ##### LICENSE
     
 The Hodgking-Huxey project consist of a very basic GSL implementation to solve the 
 Hodgking-Huxey ODE model that simulates an Action Potential for squid axon of Loligo Pelei
-Copyright (C) 2012-2013  Daniel Mejía R. [danielmejia55@gmail.com](mailto:danielmejia55@gmail.com) 
+Copyright (C) 2012-2014  Daniel Mejía R. [danielmejia55@gmail.com](mailto:danielmejia55@gmail.com) 
 
 "Hodgking-Huxley" is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
