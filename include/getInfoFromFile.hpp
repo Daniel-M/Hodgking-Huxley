@@ -47,11 +47,29 @@ void getInfoFromFile(std::string filename, double buffer[])
   
     while(data.eof()!=true)
     {
-data.getline(sBuffer,20);
-buffer[i]=atof(sBuffer);
-i++;
+		data.getline(sBuffer,20);
+		buffer[i]=atof(sBuffer);
+		i++;
     }
    
        data.close();
 }
 
+void getInfoFromFile(std::string filename, std::vector<double> buffer)
+{
+    std::ifstream data;
+    char sBuffer[20];
+    int i=0;
+    
+
+    data.open (filename.c_str(), std::ifstream::in);
+  
+    while(data.eof()!=true)
+    {
+		data.getline(sBuffer,20);
+		buffer.push_back(atof(sBuffer));
+		i++;
+    }
+   
+       data.close();
+}

@@ -66,34 +66,25 @@
     #define UNISTD_H
 #endif
 
-// GSL Headers
+// ODEINT Headers
 
-#ifndef GSL_INCLUDES_H
-    #include<gsl/gsl_odeiv2.h>
-    #include<gsl/gsl_errno.h>
-    #define GSL_INCLUDES_H
+#ifndef ODEINT_H
+	#include <vector>
+    #include <boost/numeric/odeint.hpp>
+    #define ODEINT_H
 #endif
 
 
 
-#ifndef MGL_ZB_H
-    #include "mglGraphicsZB.hpp"
-    #define MGL_ZB_H
+#ifndef MGL_H
+#include "mglGraphics.hpp"
+#define MGL_H
 #endif
 
-
-// MathGL Headers
-#ifndef MATHGL_H
-    #include<mgl/mgl.h>
-    #include <mgl/mgl_zb.h>
-    #include <mgl/mgl_eps.h>
-    #include <mgl/mgl_data.h>
-    #define MATHGL_H
-#endif
 
 #ifndef CUSTOM_INCLUDES_H
     #include "getInfoFromFile.hpp"
     #include "HH_GatingFunctions.hpp"
-    #include "HH_Model_ODES.hpp"
+    #include "HH_Model_class.hpp"
     #define CUSTOM_INCLUDES_H
 #endif
