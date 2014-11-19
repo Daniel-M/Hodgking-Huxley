@@ -26,7 +26,6 @@ Use doxygen to build documentation
 The directory "doc" will be created
 
 ##### TO DO:
-* Add OO style (it looks most like structured programming)
 * Add documentation
 * Add a GUI, and maybe, (may be) get the program working in Windows
 
