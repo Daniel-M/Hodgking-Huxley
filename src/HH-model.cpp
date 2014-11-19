@@ -227,8 +227,8 @@ int main(int argc, char **argv){
 	/* output */
 	for( size_t i=0; i<=steps; i++ )
 	{
-		//std::cout << times[i] << '\t' << y_vec[i][0] /*<< '\t' << y_vec[i][1]*/ << '\n';
-		hh_data << times[i] << '\t' << y_vec[i][0]  << "\n";
+		//std::cout << times[i] << '\t' << y_vec[i][0] << std::endl; 
+		hh_data << times[i] << '\t' << y_vec[i][0]  << std::endl;
 	}
 
 	hh_data.close();
