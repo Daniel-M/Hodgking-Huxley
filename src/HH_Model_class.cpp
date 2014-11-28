@@ -69,6 +69,7 @@ struct push_back_state_and_time
  * \param hhmodel	hh_model object that contains the ODES and gating functions.
  * \param y			a vector that stores the solution (and initial conditions)
  * \param out_datafile	The filename where the solution is going to be placed
+ */
 
 void hhSolver(int POINTS, double tf, hh_model hhmodel,std::vector<double> y,std::string out_datafile)
 {
