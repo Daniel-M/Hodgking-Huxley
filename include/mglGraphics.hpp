@@ -14,18 +14,13 @@
 / ==========================================================================*/
 //\file mglGraphicsZB.hpp
 /*! 
- * \brief Here is were the data plotting it's done.
- */ 
-
-/*! 
  * \brief MathGL implementation to generate PNG graphics
  * 
- * \param *k stores numerical values of the used parameters on the HH-model
+ * \param parametros stores numerical values of the used parameters on the HH-model
  * \param POINT is the number of points used to generate the plots. Used only to put information on the key
  * \param sFile stores the sFile to name the PNG output
- * \param ext stores the extension to search the input datafiles
  * 
- * So this class searches for files named _sFile.ext_ and then creates a _sFile-mgl.png_ file for each
+ * MathGL implementation to crete PNG file of the HH Action Potential on the given time 
  * 
  */
 

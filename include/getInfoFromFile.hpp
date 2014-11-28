@@ -29,9 +29,7 @@
 //\file getInfoFromFile.hpp
 /*! 
  *  \brief Reads datafile and stores the data into _double_ array
- */
-
-/*! \param filename The name of the file to be readed
+ *  \param filename The name of the file to be readed
  *  \param buffer[] The target array where the data will be stored
  * 
  */

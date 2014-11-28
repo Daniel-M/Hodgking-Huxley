@@ -1,6 +1,8 @@
+#!/bin/bash
 rm -rf doc
 doxygen HH-model.cfg
 cd doc
+cd pdflatex
 make
-okular refman.pdf &
+mupdf refman.pdf
 cd ..

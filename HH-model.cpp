@@ -33,7 +33,9 @@
 
 #include "HH_Includes.hpp"
 
-using namespace boost::numeric::odeint;
+//using namespace boost::numeric::odeint;
+
+//void hhSolver(int POINTS, double tf, hh_model hhmodel,std::vector<double> y,std::string out_datafile);
 
 // ==========================================================================
 // 			MAIN CODE
@@ -55,15 +57,11 @@ int main(int argc, char **argv){
     
     std::string out_datafile = basefile + "." + ext;
     
-    
-        
     // ==========================================================================
 
     double h_step;  /// h_step This will be the h_step for integrate, will be redefined on line 333
 	std::vector<double> parametros; /// parametros[8] Here one stores the ODES parameters for solvig, i.e membrane capacitance, conductances and so on
     
-    double eps_abs = 1.e-6;	/// eps_abs absolute error requested
-    double eps_rel = 1.e-8;	/// eps_rel relative error requested
     double t=0.0;       /// t Starting time, this variable is a "time buffer"
     double tf=25.0;	/// tf 25 ms for time integration
 
@@ -213,30 +211,16 @@ int main(int argc, char **argv){
 // ==========================================================================
 // ==========================================================================
 
-	std::vector<std::vector<double>> y_vec;
-	std::vector<double> times;
-
-	std::ofstream hh_data(out_datafile.c_str());
-
 	hh_model hhmodel(parametros);
 
-	h_step=tf/POINTS;
-
-	size_t steps= integrate(hhmodel,y,0.0,tf,h_step,push_back_state_and_time( y_vec , times ));
-  
-	/* output */
-	for( size_t i=0; i<=steps; i++ )
-	{
-		//std::cout << times[i] << '\t' << y_vec[i][0] << std::endl; 
-		hh_data << times[i] << '\t' << y_vec[i][0]  << std::endl;
-	}
-
-	hh_data.close();
-
+	hhSolver(POINTS, tf, hhmodel, y, out_datafile);
+ 
 	if(gengraphs!='n')
 	{
 		mglDrawFunction(parametros,POINTS,out_datafile);
 	}
 
 	exit(0);
-} //End of Main Code
+}//End of Main Code
+
+

@@ -6,11 +6,11 @@ INCLUDE_DIRECTORIES( include )
 
 ADD_DEFINITIONS( --std=c++11 )
 
-#add_library(customer SHARED
-#include/Customer.hpp
-#src/Customer.cpp
-#)
+add_library(hhmod SHARED 
+	include/HH_Model_class.hpp
+	src/HH_Model_class.cpp
+)
 
-ADD_EXECUTABLE(hh-model src/HH-model )
+ADD_EXECUTABLE(hh-model HH-model )
 
-target_link_libraries(hh-model mgl)
+target_link_libraries(hh-model mgl hhmod)

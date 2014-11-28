@@ -34,18 +34,20 @@
 //\file HH_Model_ODES.hpp 
 /*!
  * \brief Defines the ODE system proposed by Hodgking and Huxley as a class
+ *
+ * The default constructor receives a std::vector<double> that contains the parameters of the model in the order
+ *   * Membrane capacitance 
+ *   * Induced current on axon, 0 means no external current 
+ *   * Na conductances
+ *   * Na Nernst Potential
+ *   * K Conductance
+ *   * K Nernst Potential
+ *   * Leakage conductance (Due to a Cl current)
+ *   * Leakage Nernst potential (Due to a Cl current)
+ *
+ * So parameter[0] contains membrane capacitance and so on
  */
   
-/*!
- * \param t Time instant
- * \param y[] This array stores the solution of the previous iterarion
- * \param f[] This array stores the result of the actual iteration (the derivatives)
- * \param *params The array that stores the ODE constants, that is, the model parameters
- * 
- * \return Must always return GSL_SUCCESS 
- * 
- */
-
 class hh_model
 {
 	private:
@@ -65,21 +67,23 @@ class hh_model
 		}
 };
 
+void hhSolver(int POINTS, double tf, hh_model hhmodel,std::vector<double> y,std::string out_datafile);
 
-//[ integrate_observer
 
-struct push_back_state_and_time
-{
-    std::vector< std::vector<double> >& m_states;
-    std::vector< double >& m_times;
+////[ integrate_observer
 
-    push_back_state_and_time( std::vector< std::vector<double> > &states , std::vector< double > &times )
-	: m_states( states ) , m_times( times ) { }
+//struct push_back_state_and_time
+//{
+    //std::vector< std::vector<double> >& m_states;
+    //std::vector< double >& m_times;
 
-    void operator()( const std::vector<double> &x , double t )
-    {
-    	m_states.push_back( x );
-    	m_times.push_back( t );
-    }
-};
+    //push_back_state_and_time( std::vector< std::vector<double> > &states , std::vector< double > &times )
+	//: m_states( states ) , m_times( times ) { }
+
+    //void operator()( const std::vector<double> &x , double t )
+    //{
+    	//m_states.push_back( x );
+    	//m_times.push_back( t );
+    //}
+//};
 //]
